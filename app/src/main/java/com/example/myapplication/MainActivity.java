@@ -1,22 +1,13 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity {
     Double first=0.0;
@@ -34,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         buttons.add(findViewById(R.id.button17));
-        buttons.add(findViewById(R.id.button18));
 
 
 
@@ -86,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                ((TextView)findViewById(R.id.editTextTextPersonName)).setText("0");
+                ((TextView)findViewById(R.id.editTextTextPersonName)).setText("");
             }
         });
 
@@ -99,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     operation=((TextView)findViewById(R.id.button29)).getText().toString();
                     first= new Double(((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString());
-                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("0");
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("");
                 }
 
 
@@ -113,9 +103,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(first==0.0)
                 {
-                    operation=((TextView)findViewById(R.id.button29)).getText().toString();
+                    operation=((TextView)findViewById(R.id.button24)).getText().toString();
                     first= new Double(((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString());
-                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("0");
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("");
                 }
 
 
@@ -131,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
              {
                  String tmp=((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString();
                  tmp = tmp.substring(0, tmp.length() - 1);
+                 ((TextView)findViewById(R.id.editTextTextPersonName)).setText(tmp);
              }
 
 
@@ -144,9 +135,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(first==0.0)
                 {
-                    operation=((TextView)findViewById(R.id.button29)).getText().toString();
+                    operation=((TextView)findViewById(R.id.button3)).getText().toString();
                     first= new Double(((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString());
-                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("0");
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("");
+                }
+
+
+            }
+        });
+        //  %
+        (findViewById(R.id.button18)).setOnClickListener(new Button.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                if(first==0.0)
+                {
+                    operation=((TextView)findViewById(R.id.button18)).getText().toString();
+                    first= new Double(((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString());
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("");
                 }
 
 
@@ -159,9 +165,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(first==0.0)
                 {
-                    operation=((TextView)findViewById(R.id.button29)).getText().toString();
+                    operation=((TextView)findViewById(R.id.button20)).getText().toString();
                     first= new Double(((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString());
-                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("0");
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("");
                 }
 
 
@@ -207,6 +213,11 @@ public class MainActivity extends AppCompatActivity {
                             ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first*second)));
                         }
                             break;
+                        case "%":
+                        {
+                            ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first%second)));
+                        }
+                        break;
                     }
 
 
