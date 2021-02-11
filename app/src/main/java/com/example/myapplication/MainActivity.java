@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     Double first=0.0;
     String operation="";
     Double second=0.0;
+    double MRvalue=0.0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         LinkedList<Button> buttons=new LinkedList<Button>();
 
-
-        buttons.add(findViewById(R.id.button17));
 
 
 
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         buttons.add(findViewById(R.id.button31));
         buttons.add(findViewById(R.id.button32));
         buttons.add(findViewById(R.id.button33));
-        buttons.add(findViewById(R.id.button34));
 
 
 
@@ -56,9 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        buttons.add(findViewById(R.id.button37));
-        buttons.add(findViewById(R.id.button38));
-        buttons.add(findViewById(R.id.button39));
 
 
         for (Button item: buttons) {
@@ -70,6 +66,57 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+
+
+        // .
+        findViewById(R.id.button34).setOnClickListener(new Button.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                if(!((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString().contains("."))
+                {
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText(((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString()+
+                            ((Button)findViewById(R.id.button34)).getText().toString());
+                }
+
+
+            }
+        });
+
+        // MC
+        findViewById(R.id.button37).setOnClickListener(new Button.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                operation=((TextView)findViewById(R.id.button37)).getText().toString();
+                findViewById(R.id.button35).callOnClick();
+
+            }
+        });
+
+        // MR
+        findViewById(R.id.button38).setOnClickListener(new Button.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                operation=((TextView)findViewById(R.id.button38)).getText().toString();
+                findViewById(R.id.button35).callOnClick();
+
+
+            }
+        });
+
+        // M+
+        findViewById(R.id.button39).setOnClickListener(new Button.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                    operation=((TextView)findViewById(R.id.button39)).getText().toString();
+                findViewById(R.id.button35).callOnClick();
+            }
+        });
+
 
 //C
         (findViewById(R.id.button36)).setOnClickListener(new Button.OnClickListener()
@@ -144,6 +191,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //  %
+        (findViewById(R.id.button17)).setOnClickListener(new Button.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                if(first==0.0)
+                {
+                    operation=((TextView)findViewById(R.id.button17)).getText().toString();
+                    first= new Double(((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString());
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText("");
+                }
+
+
+            }
+        });
+
+        //  +|-
         (findViewById(R.id.button18)).setOnClickListener(new Button.OnClickListener()
         {
             @Override
@@ -174,61 +237,93 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //=
-        (findViewById(R.id.button35)).setOnClickListener(new Button.OnClickListener()
+
+
+
+
+    }
+
+    //= MR MC M+
+    public void OnRezultClick(View v)
+    {
+        if(((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString().length()>0) {
+            second = new Double(((TextView) findViewById(R.id.editTextTextPersonName)).getText().toString());
+        }
+
+        if((operation.contains("MC") || operation.contains("MR") || operation.contains("M+")) || (first!=0.0 && operation!=""))
         {
-            @Override
-            public void onClick(View v) {
-                second= new Double(((TextView)findViewById(R.id.editTextTextPersonName)).getText().toString());
-                if(first!=0.0 && operation!="")
+
+
+            switch (operation)
+            {
+                case "+":
                 {
-                    switch (operation)
-                    {
-                        case "+":
-                        {
 
-                            ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first+second)));
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first+second)));
 
-                        }
-                            break;
-                        case "/":
-                        {
-                            if(second==0.0)
-                            {
-                                ((TextView) findViewById(R.id.editTextTextPersonName)).setText("You can not divide by ZERO!");
-                            }
-                            else
-                                {
-                                ((TextView) findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first / second)));
-                            }
-                        }
-                            break;
-                        case "-":
-                        {
-                            ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first-second)));
-                        }
-                            break;
-                        case "*":
-                        {
-                            ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first*second)));
-                        }
-                            break;
-                        case "%":
-                        {
-                            ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first%second)));
-                        }
-                        break;
-                    }
-
-
-                    first=0.0;
-                    second=0.0;
-                    operation="";
                 }
+                break;
+                case "/":
+                {
+                    if(second==0.0)
+                    {
+                        Toast.makeText(getApplicationContext(),"You can not divide by ZERO!", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        ((TextView) findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first / second)));
+                    }
+                }
+                break;
+                case "-":
+                {
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first-second)));
+                }
+                break;
+                case "*":
+                {
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first*second)));
+                }
+                break;
+                case "%":
+                {
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(first%second)));
+                }
+                break;
+                case "+|-":
+                {
 
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf((-1)*second)));
 
+                }
+                break;
+                case "MR":
+                {
+                    ((TextView)findViewById(R.id.editTextTextPersonName)).setText((String.valueOf(MRvalue)));
+                    Toast.makeText(getApplicationContext(),"Memory-value is "+MRvalue+"!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+                case "MC":
+                {
+                    Toast.makeText(getApplicationContext(),"Memory-value cleared!", Toast.LENGTH_SHORT).show();
+                    MRvalue=0.0;
+                }
+                break;
+                case "M+":
+                {
+
+                    MRvalue+=second;
+                    Toast.makeText(getApplicationContext(),"Memory-value now is "+MRvalue+"!", Toast.LENGTH_SHORT).show();
+                }
+                break;
             }
-        });
+
+
+
+            first=0.0;
+            second=0.0;
+            operation="";
+        }
 
     }
 }
